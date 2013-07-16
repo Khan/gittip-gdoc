@@ -1,0 +1,27 @@
+{
+  "name": "gittip-gdoc",
+  "version": "0.0.1",
+  "description": "Extract records from a Google Doc and bulk set the results on Gittip.",
+  "main": "pay.js",
+  "dependencies": {
+    "request": "~2.22.0",
+    "csv": "~0.3.3"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Khan/gittip-gdoc"
+  },
+  "keywords": [
+    "gittip",
+    "google"
+  ],
+  "author": "John Resig",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Khan/gittip-gdoc/issues"
+  }
+}
