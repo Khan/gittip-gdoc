@@ -40,19 +40,30 @@ request.get(sourceData, function(e, r, csvData) {
         }
     })
     .on("end", function() {
+        var total = 0;
         var payload = users.map(function(user, i) {
-            var platform = /(gh:)/.test(user) ? "github" : "gittip";
             var amount = amounts[i];
-            user = user.replace(/(gh:)/, "");
+            var fixedUser = user.replace(/^(\w+):/, "");
+
+            var platform = fixedUser !== user ? ({
+                gh: "github",
+                tw: "twitter"
+            })[RegExp.$1] : "gittip";
 
             if (platform === "gittip") {
                 return {
-                    username: user,
+                    username: fixedUser,
                     platform: platform,
                     amount: amount.toString()
                 };
+
+            } else {
+                console.log( fixedUser + " (" + platform + ") is not on Gittip!" );
             }
         }).filter(function(user) {
+            if (user && user.amount) {
+                total += parseFloat(user.amount);
+            }
             return !!user;
         });
 
@@ -66,7 +77,7 @@ request.get(sourceData, function(e, r, csvData) {
         };
 
         request.post(options, function(err, res, body) {
-            // TODO(john): DONE!
+            console.log("DONE: " + total + " given to " + payload.length + " user(s).");
         });
     });
 });
