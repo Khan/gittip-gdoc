@@ -12,6 +12,7 @@ var sourceData = "https://docs.google.com/spreadsheet/pub?&output=csv&key=" +
     conf.gdoc_key;
 
 var API_KEY = conf.gittip_api_key;
+var API_USER = conf.gittip_username;
 
 var MAX_PER_USER = conf.gittip_max_per_user;
 
@@ -68,7 +69,7 @@ request.get(sourceData, function(e, r, csvData) {
         });
 
         var options = {
-            url: "https://www.gittip.com/khanacademy/tips.json",
+            url: "https://www.gittip.com/" + API_USER + "/tips.json",
             json: payload,
             auth: {
                 user: API_KEY,
@@ -77,7 +78,11 @@ request.get(sourceData, function(e, r, csvData) {
         };
 
         request.post(options, function(err, res, body) {
-            console.log("DONE: " + total + " given to " + payload.length + " user(s).");
+            if (res.statusCode === 200) {
+                console.log("DONE: " + total + " given to " + payload.length + " user(s).");
+            } else {
+               console.error("There was a problem sending to the Gittip API. It returned a " + res.statusCode + ".");
+            }
         });
     });
 });

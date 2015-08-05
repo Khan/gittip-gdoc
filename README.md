@@ -22,6 +22,8 @@ Once you've done this you'll need to copy `sample.config.json` to `config.json` 
 
 **Your Gittip API Key (gittip_api_key).** This can be found by going to your profile page.
 
+**Your Gittip Username (gittip_username).** This is in the URL for your profile page, eg. `khanacademy`.
+
 **You max per-user contribution (gittip_max_per_user).** This is the maximum amount (in dollars) that a user can contribute.
 
 ### Usage
